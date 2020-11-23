@@ -42,3 +42,17 @@ go build
 # generate and sign an end-entity key and cert, storing them in ./foo.com/
 $ minica --domains foo.com
 ```
+
+# Docker usage
+```
+# Build Docker image
+$ docker build -t minica .
+
+# Generate a root key and cert in minica-key.pem, and minica.pem, then
+# generate and sign an end-entity key and cert, storing them in ./foo.com/
+$ docker run -v $(pwd):/opt/app -w /opt/app minica --domains foo.com
+
+# You can add the -u flag to specify your uid so the generated keys won't be owned by root
+$ docker run -v $(pwd):/opt/app -u $(id -u) -w /opt/app minica --domains foo.com
+```
+
